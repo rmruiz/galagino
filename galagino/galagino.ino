@@ -846,19 +846,15 @@ void setup() {
 
 unsigned char buttons_get(void) {
   // galagino can be compiled without coin button. This will then
-  // be implemented by the start button. Whenever the start button 
-  // is pressed, a virtual coin button will be sent first 
+  // be implemented by the start button. Whenever the start button
+  // is pressed, a virtual coin button will be sent first
   unsigned char input_states = 0;
 #ifdef NUNCHUCK_INPUT
   input_states |= getNunchuckInput();
 #endif;
 
 #ifndef BTN_COIN_PIN
-#ifdef BTN_COIN_PIN
-  input_states |= (!digitalRead(BTN_COIN_PIN)) ? BUTTON_EXTRA : 0;
-#else
   input_states |= (!digitalRead(BTN_START_PIN)) ? BUTTON_EXTRA : 0;
-#endif
   static unsigned long virtual_coin_timer = 0;
   static int virtual_coin_state = 0;
   switch(virtual_coin_state)  {
@@ -923,7 +919,7 @@ unsigned char buttons_get(void) {
 
         emulation_reset();
       }
-    }    
+    }
   } else
     reset_timer = 0;
 #endif
@@ -953,7 +949,7 @@ unsigned char buttons_get(void) {
 
 void loop(void) {
   // run video in main task. This will send signals
-  // to the emulation task in the background to 
+  // to the emulation task in the background to
   // synchronize video
   update_screen(); 
 
